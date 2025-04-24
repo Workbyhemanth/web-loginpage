@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Login Page</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Full-page background with gradient and abstract shapes */
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Keyframes for background animation */
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Abstract shapes background */
+        .background-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .background-shapes .circle {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            animation: rotateCircle 30s linear infinite;
+        }
+
+        .background-shapes .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: 50%;
+            left: 10%;
+            animation-duration: 15s;
+        }
+
+        .background-shapes .circle-2 {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 70%;
+            animation-duration: 18s;
+        }
+
+        .background-shapes .circle-3 {
+            width: 400px;
+            height: 400px;
+            top: 20%;
+            left: 50%;
+            animation-duration: 20s;
+        }
+
+        @keyframes rotateCircle {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Login Container */
+        .login-container {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            width: 380px;
+            padding: 40px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            font-size: 30px;
+            color: #333;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Input field styling */
+        .textbox {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .textbox input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .textbox input:focus {
+            border-color: #2575fc;
+        }
+
+        /* Remember Me checkbox */
+        .remember-me {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .remember-me input {
+            margin-right: 10px;
+        }
+
+        /* Button styling */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            background: #2575fc;
+            color: white;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #6a11cb;
+        }
+
+        /* Links styling */
+        .links {
+            margin-top: 15px;
+        }
+
+        .links a {
+            color: #2575fc;
+            font-size: 14px;
+            text-decoration: none;
+            margin: 5px;
+            transition: color 0.3s;
+        }
+
+        .links a:hover {
+            color: #6a11cb;
+        }
+
+        /* Success Message */
+        .success-message {
+            color: #28a745;
+            font-size: 20px;
+            display: none;
+            margin-top: 20px;
+        }
+
+        .success-message .tick {
+            margin-right: 10px;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 480px) {
+            .login-container {
+                width: 90%;
+                padding: 30px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-shapes">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
+    <div class="login-container" id="login-container">
+        <h2>Welcome Back!</h2>
+        <form id="loginForm">
+            <!-- Username Input -->
+            <div class="textbox">
+                <input type="text" placeholder="Username" name="username" required id="username">
+            </div>
+
+            <!-- Password Input -->
+            <div class="textbox">
+                <input type="password" placeholder="Password" name="password" required id="password">
+            </div>
+
+            <!-- Remember Me checkbox -->
+            <div class="remember-me">
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">Remember me</label>
+            </div>
+
+            <!-- Sign In Button -->
+            <button type="submit" class="btn">Sign In</button>
+
+            <!-- Links for Forgot Password and Sign Up -->
+            <div class="links">
+                <a href="#">Forgot Password?</a> | <a href="#">Sign Up</a>
+            </div>
+        </form>
+
+        <!-- Success message with tick -->
+        <div class="success-message" id="successMessage">
+            <span class="tick">✔️</span>Login Successful!
+        </div>
+    </div>
+
+    <script>
+        // Get DOM elements
+        const loginForm = document.getElementById('loginForm');
+        const successMessage = document.getElementById('successMessage');
+        const loginContainer = document.getElementById('login-container');
+
+        // Sample username and password for demonstration
+        const validUsername = 'user';
+        const validPassword = 'password123';
+
+        // Handle form submission
+        loginForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get entered username and password
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Validate credentials
+            if (username === validUsername && password === validPassword) {
+                // Show success message
+                successMessage.style.display = 'block';
+                loginContainer.style.display = 'none'; // Hide login form after success
+            } else {
+                alert('Incorrect username or password');
+            }
+        });
+    </script>
+</body>
+
+</html>
